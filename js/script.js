@@ -4,9 +4,10 @@
 }); */
 
 const titleClickHandler = function(event){
+  const clickedElement = this;
   console.log('Link was clicked!');
 
-  /* remove class 'active' from all article links  */
+  /* [DONE] remove class 'active' from all article links  */
 
 //Pytanie do Kamila: activeLink nie jest nigdzie osobno zdefiniowane. Czy pojedynczy link zostaje zdefinionwany poprostu przez to, ze jest pojedynczym elementem ze zbioru activeLinks?
   const activeLinks = document.querySelectorAll('.titles a.active');
@@ -15,10 +16,13 @@ const titleClickHandler = function(event){
     activeLink.classList.remove('active');
   }
 
-  /* add class 'active' to the clicked link */
-
+  /* [DONE] add class 'active' to the clicked link */
+  
+  clickedElement.classList.add('active')
+  console.log('clickedElement:', clickedElement);
+  
  
-  /* remove class 'active' from all articles */
+  /* [DONE] remove class 'active' from all articles */
 
   const activeArticles = document.querySelectorAll('.posts .active');
 
