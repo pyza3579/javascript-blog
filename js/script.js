@@ -81,16 +81,14 @@
       /* [DONE] insert link into titleList */
       html = html + linkHTML;
       console.log('html:', html);
-
-      const links = document.querySelectorAll('.titles a');
-      console.log('links:', links);
-
-      for(let link of links) {
-        link.addEventListener('click', titleClickHandler);
-        
-      }
     }
+    const links = document.querySelectorAll('.titles a');
+    console.log('links:', links);
 
+    for(let link of links) {
+      link.addEventListener('click', titleClickHandler);
+    }
+    
     titleList.innerHTML = html;
   }
 
