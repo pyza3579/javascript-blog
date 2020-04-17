@@ -86,6 +86,7 @@
       console.log('html:', html);
 
     }
+    titleList.innerHTML = html;
     const links = document.querySelectorAll('.titles a');
     console.log('links:', links);
 
@@ -93,7 +94,7 @@
       link.addEventListener('click', titleClickHandler);
     }
 
-    titleList.innerHTML = html;
+
   };
 
 
@@ -133,6 +134,6 @@
       /* END LOOP: for every article: */
     }
   };
-
+  generateTags();
   generateTags();
 }
