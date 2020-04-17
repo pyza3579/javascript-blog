@@ -58,11 +58,12 @@
 
 
     /* [DONE] for each article */
+    let html = '';
+
     const articles = document.querySelectorAll(optArticleSelector);
     for(let article of articles) {
       console.log();
-      let html = '';
-
+      //let html = '';
 
       /* [DONE] get the article id */
       const articleId = article.getAttribute('id');
@@ -76,12 +77,14 @@
       console.log('linkHTML:', linkHTML);
 
       /* [DONE] create HTML of the link */
+
       titleList.innerHTML = titleList.innerHTML + linkHTML;
       //titleList.insertAdjacentHTML('afterend', '<article id=""></article>');
 
       /* [DONE] insert link into titleList */
       html = html + linkHTML;
       console.log('html:', html);
+
     }
     const links = document.querySelectorAll('.titles a');
     console.log('links:', links);
