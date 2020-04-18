@@ -1,8 +1,5 @@
 'use strict';
-/* document.getElementById('test-button').addEventListener('click', function(){
-  const links = document.querySelectorAll('.titles a');
-  console.log('links:', links);
-}); */
+
 {
   const titleClickHandler = function(event){
     event.preventDefault();
@@ -99,9 +96,8 @@
 
 
   generateTitleLinks();
- 
+
   const generateTags = function() {
-    debugger;
 
     /* find all articles */
     const articles = document.querySelectorAll(optArticleSelector);
@@ -136,47 +132,54 @@
     }
   };
   generateTags();
-  //ta funkcja wydaje sie nie dzialac w ogole??
-  const tagClickHandler = function(event){
+
+  function tagClickHandler(event) {
+    debugger;
     /* prevent default action for this event */
     event.preventDefault();
+
     /* make new constant named "clickedElement" and give it the value of "this" */
     const clickedElement = this;
-    console.log('Tag was clicked!');
+    //console.log('Link was clicked again!');
 
     /* make a new constant "href" and read the attribute "href" of the clicked element */
     const href = clickedElement.getAttribute('href');
-    console.log('href :', href);
     /* make a new constant "tag" and extract tag from the "href" constant */
-    const tag = document.querySelector(href);
-  /* find all tag links with class active */
-
-  /* START LOOP: for each active tag link */
-
-    /* remove class active */
-
-  /* END LOOP: for each active tag link */
-
-  /* find all tag links with "href" attribute equal to the "href" constant */
-
-  /* START LOOP: for each found tag link */
-
-    /* add class active */
-
-  /* END LOOP: for each found tag link */
-
-  /* execute function "generateTitleLinks" with article selector as argument */
-}
-
+    const tag = href.replace('#tag-', '');
+    /* find all tag links with class active */
+    const activeTags = document.querySelectorAll('a.active[href^="#tag-"]');
+    /* START LOOP: for each active tag link */
+    for(let activeTag of activeTags) {
+      /* remove class active */
+      activeTag.classList.remove('active');
+      /* END LOOP: for each active tag link */
+    }
+    /* find all tag links with "href" attribute equal to the "href" constant */
+    const tagHrefs = document.querySelectorAll('a[href="' + href + '"]');
+    /* START LOOP: for each found tag link */
+    for(let tagHref of tagHrefs) {
+      /* add class active */
+      tagHref.classList.add('active');
+    /* END LOOP: for each found tag link */
+    }
+    /* execute function "generateTitleLinks" with article selector as argument */
+    generateTitleLinks('[data-tags~="' + tag + '"]');
+  }
+  //tagClickHandler(event);
   function addClickListenersToTags(){
-  /* find all links to tags */
 
-  /* START LOOP: for each link */
+    /* find all links to tags */
+    const links = document.querySelectorAll('.post-tags .list a, .list.tags a');
 
-    /* add tagClickHandler as event listener for that link */
 
-  /* END LOOP: for each link */
+    for(let link of links) {
+
+      /* add tagClickHandler as event listener for that link */
+      link.addEventListener('click', tagClickHandler);
+    }
+    /* END LOOP: for each link */
   }
 
   addClickListenersToTags();
+
 }
