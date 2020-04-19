@@ -171,15 +171,13 @@
   }
   //tagClickHandler(event);
   function addClickListenersToTags(){
-
     /* find all links to tags */
-    const links = document.querySelectorAll('a[href^="#"]');
-    //('a[href^="#tag-"]')
+    const tagLinks = document.querySelectorAll('a[href^="#tag-"]');
 
-    for(let link of links) {
+    for(let tagLink of tagLinks) {
 
       /* add tagClickHandler as event listener for that link */
-      link.addEventListener('click', tagClickHandler);
+    tagLink.addEventListener('click', tagClickHandler);
     }
     /* END LOOP: for each link */
   }
