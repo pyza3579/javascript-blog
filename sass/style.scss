@@ -118,4 +118,22 @@ body {
     margin: 0 10px 0 0;
   }
 }
+/* Tag */
+.tag-size-1 {
+  font-size: 20px;
+  color:red;
+}
 
+.tag-size-2 {
+  font-size: 35px;
+  color:pink;
+}
+
+.tag-size-3 {
+  font-size: 50px;
+  color:blue;
+}
+.tags.list {
+  //display: inline-flex;
+
+}

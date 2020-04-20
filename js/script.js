@@ -47,7 +47,9 @@
     optTitleListSelector = '.titles',
     optArticleTagsSelector = '.post-tags .list',
     optArticleAuthorSelector = '.post-author',
-    optTagsListSelector = '.tags.list';
+    optTagsListSelector = '.tags.list',
+    optCloudClassCount = 5,
+    optCloudClassPrefix = '.tag-size-';
 
 
   const generateTitleLinks = function(customSelector = '') {
@@ -104,11 +106,11 @@
 
   const calculateTagsParams = function(tags){
     const params = {
-      max: 0,
-      min: 999999
+      max: '0',
+      min: '999999' //w cudzyslowiie czy bez?
     };
 
-    for( let tag in tags ){
+    for(let tag in tags){
       console.log(tag + ' is used ' + tags[tag] + ' times ');
       if(tags[tag] > params.max){
         params.max = tags[tag];
@@ -120,7 +122,15 @@
     return params;
     console.log('params');
   };
-//HIER AUFGEHÖRT!!!
+  const calculateTagClass = function(count,params){ //co tu sie dzeieje?? nic z tego nie rozumiem, wartosci sie nie zgadzaja
+
+    const normalizedCount = count - params.min;
+    const normalizedMax = params.max - params.min;
+    const percentage = normalizedCount / normalizedMax;
+    const classNumber = Math.floor( percentage * (optCloudClassCount - 1) + 1 );
+    return optCloudClassPrefix, classNumber; // nie rozumiem
+  }
+
   const generateTags = function() {
     debugger;
     /* [NEW] create a new variable allTags with an empty object */
@@ -147,7 +157,7 @@
       for(let tag of articleTagsArray) {
 
         /* [DONE] generate HTML of the link */
-        const linkHTML = '<li><a href="#tag-' + tag + '"><span>' + tag + '</span></a></li>';
+        const linkHTML = '<li><a  class="" href="#tag-' + tag + '"><span>' + tag + '</span></a></li>';
         /* [DONE] add generated code to html variable */
         html = html + linkHTML;
         /* [NEW] check if this link is NOT already in allTags */
@@ -178,13 +188,20 @@
     /* [NEW] create variable for all links HTMLMcode */
     let allTagsHTML = '';
     /* [NEW] START LOOP: for each tag in allTags*/
-    for(let tag in allTags){
+    for(let tag in allTags){ //nie rozumiem tego zupelnie, ja ma byc generowany ten link?
       /* [NEW] generate code of a link and add it to allTagsHTML */
-      allTagsHTML += tag + ' (' + allTags[tag] + ') ';
-      //jak wygenerowac tutaj link??
-      //const tagLinkHTML = '<li><a href="#tag-' + tag + '"><span>' + tag + ' + allTagsHTML += tag + ' (' + allTags[tag] + ') '</span></a></li>';
-    }
+
+      // podane allTagsHTML += tag + ' (' + allTags[tag] + ') ';
+      //allTagsHTML += tagLinkHTML;
+      allTagsHTML += '<li><a href="#tag-' + tag + '"><span>' + tag + '</span></a></li>';
+
+      const tagLinkHTML = '<li><a class="tag-size-' + calculateTagClass(allTags[tag], tagsParams); + '" + href="#tag-' + tag + '"<span>' + tag + '</span></a></li>'
+      console.log('tagLinkHTML:', tagLinkHTML);
+
+
+
     /* [NEW] END LOOP: for each tag in allTags: */
+    }
     /* [NEW] add HTML from allTagsHTML to tagList */
     tagList.innerHTML = allTagsHTML;
 
