@@ -133,7 +133,7 @@
   }
 
   const generateTags = function() {
-    debugger;
+
     /* [NEW] create a new variable allTags with an empty object */
     let allTags = {};
 
@@ -258,6 +258,7 @@
   addClickListenersToTags();
 
   const generateAuthors = function () {
+    debugger;
     /* [NEW] create a new variable allAuthors with an empty array[]/object {} */
     let allAuthors = {}
 
@@ -295,7 +296,7 @@
     }
     /* [NEW] find list of authors in right column */
     const authorsList = document.querySelector('.authors');
-    console.log('allAuthors', allAuthors);
+
     /* [NEW] add html from allAuthors to authorsList */
     //authorsList.innerHTML = allAuthors.join(' ');
 
@@ -304,8 +305,10 @@
     /* [NEW] START LOOP: for each author in allAuthors: */
     for(let articleAuthor in allAuthors){
 
-      /* [NEW] generate code of a link and add it to allAuthorsHTML */
-      allAuthorsHTML += articleAuthor + ' (' + allAuthors[articleAuthor] + ') ';
+      /* [NEW] generate code of a link and add it to allAuthorsHTML */ //po klinknieciu znikaja artykuly,ale link wyswietla sie poprawnie
+      allAuthorsHTML += '<li><a href="# author-' + articleAuthor +  ' (' + allAuthors[articleAuthor] + ')">' + articleAuthor + ' ('+ allAuthors[articleAuthor] + ') </a></li>';
+      console.log('allAuthorsHTML:', allAuthorsHTML);
+
     /* [NEW] END LOOP: for each articleAuthor in allAuthors */
     }
     /* [NEW] add HTML from allAuthorsHTML to authorsList */
