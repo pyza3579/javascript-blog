@@ -258,8 +258,9 @@
   addClickListenersToTags();
 
   const generateAuthors = function () {
-    /* [NEW] create a new variable allAuthors with an empty array */
-    let allAuthors = [];
+    /* [NEW] create a new variable allAuthors with an empty array[]/object {} */
+    let allAuthors = {}
+
     /* [DONE] find all articles */
     const articles = document.querySelectorAll(optArticleSelector);
     /* START LOOP: for every article: */
@@ -278,10 +279,15 @@
       html = html + linkHTML;
 
       /* [NEW] check if this link is NOT already in allAuthors */
-      if(allAuthors.indexOf(linkHTML) == -1){
-      /* [NEW] add generated code to allAuthors*/
-      allAuthors.push(linkHTML);
+      if(!allAuthors[articleAuthor]) {
+        /* [NEW] add articleAuthor to allAuthors object */
+        allAuthors[articleAuthor] = 1;
+      } else {
+        allAuthors[articleAuthor]++;
       }
+      /* [NEW] add generated code to allAuthors*/
+      //allAuthors.push(linkHTML);
+
       /* [DONE] insert HTML of all the links into the author wrapper */
       authorWrapper.innerHTML = html; //jeszcze raz przerobic
 
@@ -289,11 +295,25 @@
     }
     /* [NEW] find list of authors in right column */
     const authorsList = document.querySelector('.authors');
-
+    console.log('allAuthors', allAuthors);
     /* [NEW] add html from allAuthors to authorsList */
-    authorsList.innerHTML = allAuthors.join(' ');
+    //authorsList.innerHTML = allAuthors.join(' ');
+
+    /* [NEW] create variable for all links HTML code */
+    let allAuthorsHTML = '';
+    /* [NEW] START LOOP: for each author in allAuthors: */
+    for(let articleAuthor in allAuthors){
+
+      /* [NEW] generate code of a link and add it to allAuthorsHTML */
+      allAuthorsHTML += articleAuthor + ' (' + allAuthors[articleAuthor] + ') ';
+    /* [NEW] END LOOP: for each articleAuthor in allAuthors */
+    }
+    /* [NEW] add HTML from allAuthorsHTML to authorsList */
+    authorsList.innerHTML = allAuthorsHTML;
+
   };
   generateAuthors();
+
 
   const authorClickHandler = function(event) {
     /* [DONE] prevent default action for this event */
