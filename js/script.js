@@ -1,7 +1,11 @@
 'use strict';
 
-{ const templates = {
-  articleLink: Handlebars.compile(document.querySelector('#template-article-link').innerHTML)
+{
+  const templates = {
+    articleLink: Handlebars.compile(document.querySelector('#template-article-link').innerHTML),
+    tagLink: Handlebars.compile(document.querySelector('#template-tag-link').innerHTML),
+    authorLink: Handlebars.compile(document.querySelector('#template-author-link').innerHTML),
+    tagCloudLink: Handlebars.compile(document.querySelector('#template-article-link').innerHTML),
   }
   const titleClickHandler = function(event){
     event.preventDefault();
@@ -69,8 +73,6 @@
     const articles = document.querySelectorAll(optArticleSelector + customSelector);
 
     for(let article of articles) {
-
-      //let html = '';
 
       /* [DONE] get the article id */
       const articleId = article.getAttribute('id');
@@ -162,7 +164,9 @@
       for(let tag of articleTagsArray) {
 
         /* [DONE] generate HTML of the link */
-        const linkHTML = '<li><a  class="" href="#tag-' + tag + '"><span>' + tag + '</span></a></li>';
+        //const linkHTML = '<li><a  class="" href="#tag-' + tag + '"><span>' + tag + '</span></a></li>';
+        const linkHTMLData = {id: tag, title: tag};
+        const linkHTML = templates.tagLink(linkHTMLData);
         /* [DONE] add generated code to html variable */
         html = html + linkHTML;
         /* [NEW] check if this link is NOT already in allTags */
@@ -192,6 +196,8 @@
     console.log('tagsParams:', tagsParams)
     /* [NEW] create variable for all links HTMLMcode */
     let allTagsHTML = '';
+    //const allTagsData = {tags: []}; po zmianie na szablon handlebars:
+
     /* [NEW] START LOOP: for each tag in allTags*/
     for(let tag in allTags){ //nie rozumiem tego zupelnie, ja ma byc generowany ten link?
       /* [NEW] generate code of a link and add it to allTagsHTML */
@@ -279,7 +285,9 @@
       const articleAuthor = article.getAttribute('data-author');
 
       /* [DONE] generate HTML of the link */
-      const linkHTML = '<li><a href="# author-' + articleAuthor + '"><span>' + articleAuthor + '</span></a></li>';
+      //const linkHTML = '<li><a href="# author-' + articleAuthor + '"><span>' + articleAuthor + '</span></a></li>';
+      const linkHTMLData = {id: articleAuthor, title: articleAuthor};
+      const linkHTML = templates.authorLink(linkHTMLData);
       /* [DONE] add generated code to html variable */
       html = html + linkHTML;
 
