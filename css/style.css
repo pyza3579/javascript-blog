@@ -110,17 +110,21 @@ body {
 
 /* Tag */
 .tag-size-1 {
-  font-size: 20px;
+  font-size: 15px;
   color: red;
 }
 
 .tag-size-2 {
-  font-size: 35px;
+  font-size: 25px;
   color: pink;
 }
 
 .tag-size-3 {
-  font-size: 50px;
+  font-size: 32px;
   color: blue;
+}
+
+.tags.list {
+  display: inline-table;
 }
 /*# sourceMappingURL=style.css.map */
